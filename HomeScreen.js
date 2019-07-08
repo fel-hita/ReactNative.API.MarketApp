@@ -24,7 +24,7 @@ export default class HomeScreen extends React.Component {
 
   renderItem = ({item}) => {
     return (
-      <TouchableOpacity 
+      <TouchableOpacity
           onPress={() => this.props.navigation.navigate('DetailScreen', { title: item.title, description: item.description, img: `${this.state.base_url}${item.photo_main}` })}
           style={{ flex: 1, flexDirection: 'row', marginBottom: 3}}>
         <Image style={{width: 100, height: 100, margin: 5}}
