@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import LoginScreen from './LoginScreen';
-import HomeScreen from './HomeScreen';
-import RegisterPage from './RegisterPage';
-import RegisterSeller from './RegisterSeller';
-import RegisterBuyer from './RegisterBuyer';
-import DetailScreen from './DetailScreen';
+import LoginScreen from './src/components/LoginScreen';
+import HomeScreen from './src/components/HomeScreen';
+import RegisterPage from './src/components/RegisterPage';
+import RegisterSeller from './src/components/RegisterSeller';
+import RegisterBuyer from './src/components/RegisterBuyer';
+import DetailScreen from './src/components/DetailScreen';
 
 export default class App extends React.Component {
     render () {
@@ -18,10 +17,10 @@ export default class App extends React.Component {
 const RootStack = createStackNavigator(
     {
         LoginScreen: {
-            screen: LoginScreen
+            screen: HomeScreen
         },
         HomeScreen: {
-            screen: HomeScreen
+            screen: LoginScreen
         },
         RegisterPage: {
             screen: RegisterPage

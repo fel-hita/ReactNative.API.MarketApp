@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
-import { ListItem, SearchBar, Avatar } from "react-native-elements";
-import { StackNavigator } from 'react-navigation';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -25,7 +23,18 @@ export default class HomeScreen extends React.Component {
   renderItem = ({item}) => {
     return (
       <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('DetailScreen', { title: item.title, description: item.description, img: `${this.state.base_url}${item.photo_main}` })}
+          onPress={() => this.props.navigation.navigate('DetailScreen', { 
+            title: item.title,
+            description: item.description,
+            price: item.price, 
+            photo_main: `${this.state.base_url}${item.photo_main}`,
+            photo_1: `${this.state.base_url}${item.photo_1}`,
+            photo_2: `${this.state.base_url}${item.photo_2}`,
+            photo_3: `${this.state.base_url}${item.photo_3}`,
+            photo_4: `${this.state.base_url}${item.photo_4}`,
+            photo_5: `${this.state.base_url}${item.photo_5}`,
+            photo_6: `${this.state.base_url}${item.photo_6}`,
+          })}
           style={{ flex: 1, flexDirection: 'row', marginBottom: 3}}>
         <Image style={{width: 100, height: 100, margin: 5}}
           source={{ uri: `${this.state.base_url}${item.photo_main}` }}
