@@ -1,47 +1,41 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Platform } from 'react-native';
 import Slideshow from 'react-native-image-slider-show';
+import AwesomeButton from "react-native-really-awesome-button";
+import LinearGradient from "react-native-linear-gradient";
 
 export default class DetailScreen extends React.Component {
   
   constructor(props) {
     super(props);
-
-    const { state: { params } } = this.props.navigation;
+    //const { state: { params } } = this.props.navigation;
 
     this.state = {
       clicked: false,
+      fontLoaded: false,
       position: 1,
       interval: null,
       dataSource: [
         {
-          url: params.photo_main,
+          url: 'https://www.lawrodriguez.com/wp-content/uploads/2013/03/landscape-5-800x400.jpg',
         }, {
-          url: params.photo_1,
+          url: 'http://blog.luckynuggetcasino.com/wp-content/uploads/2016/06/Himilayas-800-x-400.jpg',
         }, {
-          url: params.photo_2,
+          url: 'https://www.sleepzone.ie/uploads/images/PanelImages800x400/TheBurren/General/sleepzone_hostels_burren_800x400_14.jpg',
         }, {
-          url: params.photo_3,
+          url: 'http://www.wmconnolley.org.uk/diary/2001/07/Dscn3341-lfk-ls-rgs-pwand_crop_800x400.jpg',
         }, {
-          url: params.photo_4,
+          url: 'https://atlasmusicrentals.com/wp-content/uploads/Winter_storm_clearing__Campbell_Peak__Telluride__CO_op_800x400.jpg',
         }, {
-          url: params.photo_5,
+          url: 'https://www.visitbangormaine.com/wp-content/uploads/2017/07/Bangor-Maine-View-of-Katahdin-800x400.jpg',
         }, {
-          url: params.photo_6,
+          url: 'https://physicsworld.com/wp-content/uploads/2018/12/phase-out-oil-production-e1543488923825-800x400.jpg',
         }
       ],
     };
   }
 
-  render() {
-    return (
-      <View>
-        
-      </View>
-    );
-  }
-
-  componentWillMount() {
+  async componentWillMount() {
     this.setState({
       interval: setInterval(() => {
         if (this.state.clicked === false)
@@ -59,23 +53,31 @@ export default class DetailScreen extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-      <View style={styles.bContainer}>
-          <Text style={styles.title}>{params.title}</Text>
-          <Text style={styles.price}>Prix {params.price} DH</Text>
-          <Text style={styles.description}>{params.description}</Text>
-      </View>
-      <Slideshow 
-        height={300}
-        dataSource={this.state.dataSource}
-        position={this.state.position}
-        onPositionChanged={ position => this.setState({ position })}
-        onPress={ () =>  this.state.clicked = true}/>
+      return (
+        <View>
+          <Slideshow
+            height={300}
+            dataSource={this.state.dataSource}
+            position={this.state.position}
+            onPositionChanged={position => this.setState({ position })}
+            onPress={() => this.state.clicked = true} />
+          <View style={styles.bContainer}>
+            <Text style={styles.title}>This is a title</Text>
+            <Text style={styles.price}>Prix 99999 DH</Text>
+            <Text style={styles.description}>Blablah blah bahblahblah blah blah</Text>
+          </View>
+          <AwesomeButton
+            ExtraContent={
+              <LinearGradient
+                colors={["#4C63D2", "#BC3081", "#F47133", "#FED576"]}
+              />
+            }
+          >
+      <Text>Instagram</Text>
+    </AwesomeButton>
         </View>
-    );
-  }
-
+      );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -97,10 +99,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-   subtitleView: {
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingTop: 20,
+  title: {
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize: 30,
+    color: 'rgb(0, 0, 0)',
+  },
+  price: {
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'rgb(242, 207, 10)',
   },
   description: {
     fontSize: 30,
@@ -108,35 +116,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 30
   },
-  title: {
-    textAlign: 'center',
-    marginTop: 100,
-    fontSize: 30,
-    color: 'rgb(81, 237, 64)',
-  },
-  price: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'rgb(242, 207, 10)',
-  },
   backgroundImg: {
     height: 300,
     width: '100%',
     resizeMode: 'stretch',
     position: 'absolute',
     top: 0
-  },
-  rightBtn: {
-    marginTop: 150,
-    marginRight: 10,
-    alignSelf: 'flex-end',
-    width: 30,
-    height: 30
-  },
-  leftBtn: {
-    marginRight: 10,
-    alignSelf: 'flex-end',
-    width: 30,
-    height: 30
   }
 });
