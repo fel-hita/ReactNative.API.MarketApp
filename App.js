@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import LoginScreen from './src/components/LoginScreen';
 import HomeScreen from './src/components/HomeScreen';
@@ -13,7 +12,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            fontLoaded: false
+            fontLoaded: false,
         }
     }
 
@@ -36,7 +35,7 @@ export default class App extends React.Component {
 const RootStack = createStackNavigator(
     {
         LoginScreen: {
-            screen: DetailScreen,
+            screen: LoginScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Home',
                 header: null
@@ -71,7 +70,7 @@ const RootStack = createStackNavigator(
               })
         },
         DetailScreen: {
-            screen: LoginScreen,
+            screen: DetailScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Home',
                 header: null

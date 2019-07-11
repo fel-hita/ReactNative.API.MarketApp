@@ -5,12 +5,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
+    const { state: { params } } = this.props.navigation;
     this.state = {
+      token: params.token,
       isLoading: true,
       dataSource: [],
       base_url: 'http://10.12.9.7:8000'
     }
   }
+
 
   renderSeparator = () => {
     return (
@@ -34,6 +37,7 @@ export default class HomeScreen extends React.Component {
             photo_4: `${this.state.base_url}${item.photo_4}`,
             photo_5: `${this.state.base_url}${item.photo_5}`,
             photo_6: `${this.state.base_url}${item.photo_6}`,
+            category: item.category
           })}
           style={{ flex: 1, flexDirection: 'row', marginBottom: 3}}>
         <Image style={{width: 100, height: 100, margin: 5}}
@@ -71,19 +75,30 @@ export default class HomeScreen extends React.Component {
     )
   }
 
-  componentDidMount () {
-    const url = 'http://10.12.9.7:8000/listings/list.json'
-    fetch(url)
-      .then((response) => response.json())
+  getApiList = async () => {
+    await fetch('http://10.12.9.7:8000/listings/list.json', {
+      method: "GET",
+      headers: {
+        'Accept':'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.state.token.token
+      },
+    })
+      .then((response) => response.json()) 
       .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        })
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson
       })
+    })
       .catch((error) => {
         console.log(error)
     })
+  }
+
+  componentDidMount() {
+    console.log(this.state.token.token);
+    this.getApiList();
   }
 }
 
