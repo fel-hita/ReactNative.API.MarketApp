@@ -46,11 +46,11 @@ export default class HomeScreen extends React.Component {
           source={{ uri: `${this.state.base_url}${item.photo_main}` }}
         />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{ fontSize: 18, color: 'green', marginBottom: 15}}>
+          <Text style={{ fontSize: 18, color: 'green', marginBottom: 15, marginLeft: 15}}>
             {item.title}
           </Text>
-          <Text style={{ fontSize: 16, color: 'red'}}>
-            {item.description}
+          <Text style={{ position: 'absolute', right: 30, fontSize: 16, color: 'black'}}>
+            {item.price} DH
           </Text>
         </View>
       </TouchableOpacity>
@@ -99,7 +99,6 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.token.token);
     this.getApiList();
   }
 }

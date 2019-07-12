@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image} from 'react-native';
 import Slideshow from 'react-native-image-slider-show';
-import { LinearGradient } from 'expo-linear-gradient';
 import Divider from 'react-native-divider';
+import { Button } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
+
 
 export default class DetailScreen extends React.Component {
   
@@ -13,7 +15,7 @@ export default class DetailScreen extends React.Component {
     this.state = {
       clicked: false,
       fontLoaded: false,
-      position: 1,
+      position: 0,
       interval: null,
       title: params.title,
       price: params.price,
@@ -23,37 +25,23 @@ export default class DetailScreen extends React.Component {
         {
           url: params.photo_main,
         }, {
-          url: params.photo_1,
+          url: params.photo_1 == '' ? params.photo_main : params.photo_1,
         }, {
-          url: params.photo_2,
+          url: params.photo_2 == '' ? params.photo_main : params.photo_2,
         }, {
-          url: params.photo_3,
+          url: params.photo_3 == '' ? params.photo_main : params.photo_3,
         }, {
-          url: params.photo_4,
+          url: params.photo_4 == '' ? params.photo_main : params.photo_4,
         }, {
-          url: params.photo_5,
+          url: params.photo_5 == '' ? params.photo_main : params.photo_5,
         }, {
-          url: params.photo_6
+          url: params.photo_6 == '' ? params.photo_main : params.photo_6
         }
       ],
     };
   }
 
   async componentWillMount() {
-    this.setState({
-      interval: setInterval(() => {
-        if (this.state.clicked === false)
-        {
-          this.setState({
-            position: this.state.position === this.state.dataSource.length ? 0 : this.state.position + 1
-          });
-        }
-      }, 3000)
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.interval);
   }
 
   render() {
@@ -71,16 +59,28 @@ export default class DetailScreen extends React.Component {
             Details
           </Divider>
           <View style={styles.mContainer}>
-            <LinearGradient
-              style={{ width: '100%', height: '100%' }}
-              colors={['#fff', '#fff']}>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.title}>{this.state.title}</Text>
-                <Text style={styles.price}>{this.state.price} DH</Text>
               </View>
               <Text style={styles.category}>{this.state.category}</Text>
-              <Text style={styles.description}>{this.state.description}</Text>
-            </LinearGradient>
+              <Text style={styles.price}>{this.state.price} DH</Text>
+              <ScrollView style={{ marginBottom: 5, height: '28%' }}>
+              <Text style={styles.description}>blablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdad</Text>
+              </ScrollView>
+          </View>
+          <View style={{ marginBottom: 5, flex: 1,justifyContent: 'flex-end'}}>
+            <Divider borderColor="#000" color="#000" orientation="center">
+              BIDDING
+            </Divider>
+          </View>
+          <View style={{ alignItems:'center', marginBottom: 20 }}>
+            <Button
+              type="outline"
+              title="BID NOW"
+              style={styles.btnBid}
+              onPress={this._bidNow}
+            >
+            </Button>
           </View>
         </View>
       );
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     color: 'rgb(0, 0, 0)',
   },
   price: {
-    top: 18,
     position: 'absolute',
     right: 20,
     fontSize: 20,
@@ -125,13 +124,11 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
     marginTop: 30,
-    textShadowColor: '#000',
-    textShadowOffset: { width: 0.5, height: 0.8 },
-    textShadowRadius: 3,
   },
   category: {
+    marginLeft: 10,
     fontSize: 10,
-    color: 'black',
+    color: '#30B1F5',
     marginLeft: 5,
     textShadowColor: '#00FF42',
     textShadowOffset: { width: 0.5, height: 0.5 },
@@ -146,5 +143,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 40
-  }
+  },
+  btnBid: {
+    width: 100,
+  },
+  btnBidTxt: {
+    width: 100,
+    color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center'
+  },
 });

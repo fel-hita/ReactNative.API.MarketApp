@@ -51,9 +51,8 @@ export default class LoginScreen extends React.Component {
           <Button
             type="outline"
             title="LOGIN"
-            style={styles.btnEnter}
+            style={styles.btnEnterText}
             onPress={this._signin}>
-            <Text style={styles.btnEnterText}>ENTER</Text>
           </Button>
         </View>
         <Text style={styles.Notmember}>BECOME MEMBER</Text>
@@ -61,10 +60,9 @@ export default class LoginScreen extends React.Component {
           <Button
             type="outline"
             title="REGISTER"
-            style={styles.btnRegister}
+            style={styles.btnEnterText}
             onPress={this._register}
           >
-            <Text style={styles.btnEnterText}>REGISTER</Text>
           </Button>
         </View>
       </View>
@@ -168,8 +166,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '700',
     textAlign: 'center'
-  },
-  btnRegister: {
-    width: 100,
   },
 });

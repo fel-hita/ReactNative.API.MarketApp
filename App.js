@@ -51,7 +51,6 @@ const RootStack = createStackNavigator(
             screen: RegisterPage,
             navigationOptions: ({navigation}) => ({
                 title: 'Registration',
-                header: null
               })
         },
         RegisterBuyer: {
