@@ -1,10 +1,8 @@
-//import liraries
 import React from 'react';
-import { StyleSheet, Text, TextInput, AsyncStorage, TouchableOpacity, StatusBar, ActivityIndicator, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import AwesomeButton from 'react-native-really-awesome-button/src/themes/rick';
+import { Button } from 'react-native-elements';
 
-// create a component
 export default class LoginScreen extends React.Component {
 
   constructor(props){
@@ -12,16 +10,17 @@ export default class LoginScreen extends React.Component {
     this.state = {
       username:'',
       password:'',
-      token:''
+      token:'',
+      isValid:''
     }
   }
 
   render() {
     return (
       <View style={styles.container}>
-      <LinearGradient
-        style={{position: 'absolute', width: '100%', height: '100%'}}
-        colors={['#58D68D', '#186A3B']}>
+        <LinearGradient
+          style={{ position: 'absolute', width: '100%', height: '100%' }}
+          colors={['#fff', '#adf3e2']}>
         </LinearGradient>
         <View style={styles.welcome}>
           <Text>
@@ -29,8 +28,9 @@ export default class LoginScreen extends React.Component {
           </Text>
         </View>
         <TextInput style={styles.input}
-          autoCapitalize = 'none'
+          autoCapitalize='none'
           placeholder="Username"
+          autoCorrect={false}
           editable={true}
           multiline={true}
           maxLength={40}
@@ -48,22 +48,24 @@ export default class LoginScreen extends React.Component {
           value={this.state.password}
         />
         <View>
-            <AwesomeButton
-              style={styles.btnEnter}
-              type="anchor"
-              onPress={this._signin}>
-              <Text style={styles.btnEnterText}>ENTER</Text>
-            </AwesomeButton>
+          <Button
+            type="outline"
+            title="LOGIN"
+            style={styles.btnEnter}
+            onPress={this._signin}>
+            <Text style={styles.btnEnterText}>ENTER</Text>
+          </Button>
         </View>
         <Text style={styles.Notmember}>BECOME MEMBER</Text>
         <View>
-          <AwesomeButton
+          <Button
+            type="outline"
+            title="REGISTER"
             style={styles.btnRegister}
-            type="anchor"
             onPress={this._register}
           >
             <Text style={styles.btnEnterText}>REGISTER</Text>
-          </AwesomeButton>
+          </Button>
         </View>
       </View>
     );
@@ -89,19 +91,28 @@ export default class LoginScreen extends React.Component {
         'password': pass
       })
     })
-    .then(response => response.json()
+    .then(response => {
+      isValid= response.ok
+      return response.json()
+    })
       .then(data => ({
         token: data,
       }))
       .then(res => {
-        this.props.navigation.navigate('HomeScreen', {
-          token: res.token
-        })
-    }));
+        if (isValid)
+        {
+          this.props.navigation.navigate('HomeScreen', {
+            token: res.token
+          })
+        }
+        else
+        {
+          alert('Invalid Login/Password');
+        }
+    });
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -113,7 +124,7 @@ const styles = StyleSheet.create({
   welcomeTextIn: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#068A28',
+    color: '#14CFEC',
     textShadowColor: '#00FF42',
     textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 3,
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   Notmember: {
-    color: '#005B18',
+    color: '#14CFEC',
     textShadowColor: '#00FF42',
     textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 3,
@@ -148,11 +159,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   btnEnter: {
+    height: 100,
     width: 100,
   },
   btnEnterText: {
     width: 100,
-    color: '#007F21',
+    color: '#fff',
     fontWeight: '700',
     textAlign: 'center'
   },

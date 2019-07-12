@@ -1,55 +1,57 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, AsyncStorage, TouchableOpacity, StatusBar, ActivityIndicator, View } from 'react-native';
-import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
-import RegisterSeller from './RegisterSeller';
-import RegisterBuyer from './RegisterBuyer';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Divider from 'react-native-divider';
 
-class RegisterPage extends React.Component {
+export default class RegisterPage extends React.Component {
     render () {
         return (
             <View style={styles.container}>
-            <View style={styles.topview}>
-                <TouchableOpacity
-                style={styles.BuyerTxt}
-                onPress={this._registerBuyer}
-                >
-                <Text style={{fontSize: 30}} >BUYER</Text>
-              </TouchableOpacity>
-              </View>
-              <View style={styles.botview}>
-              <TouchableOpacity
-                style={styles.SellerTxt}
-                onPress={this._registerSeller}
-                >
-                <Text style={{fontSize: 30}} >SELLER</Text>
-              </TouchableOpacity>
-              </View>
-              </View>
+                <View style={styles.topview}>
+                    <LinearGradient
+                        style={{ position: 'absolute', width: '100%', height: '100%' }}
+                        colors={['#FFCE00', '#fff']}>
+
+                        <TouchableOpacity
+                            style={styles.Buyer}
+                            onPress={this._registerBuyer}
+                        >
+                            <Image
+                                source={require('../../assets/coins.png')}
+                            />
+                            <Text style={styles.buyerTxt} >BUYER</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
+                <Divider borderColor="#000" color="#000" orientation="center">
+                 Register As
+                </Divider>
+                <View style={styles.botview}>
+                    <LinearGradient
+                        style={{ position: 'absolute', width: '100%', height: '100%' }}
+                        colors={['#fff', '#adf3e2']}>
+                        <TouchableOpacity
+                            style={styles.Seller}
+                            onPress={this._registerSeller}
+                        >
+                            <Image
+                                source={require('../../assets/price-tag.png')}
+                            />
+                            <Text style={styles.sellerTxt} >SELLER</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
+            </View>
         )
     }
     _registerBuyer = async() => {
-        this.props.navigation.navigate('Buy');
+        this.props.navigation.navigate('RegisterBuyer');
       }
 
     _registerSeller = async() => {
-        this.props.navigation.navigate('Sell');
+        this.props.navigation.navigate('RegisterSeller');
     }
 } 
-
-const SellerP = createStackNavigator({Seller: RegisterSeller});
-const BuyerP = createStackNavigator({Buyer: RegisterBuyer});
-
-export default createAppContainer(
-    createSwitchNavigator(
-      {
-        RegisterPage: RegisterPage,
-        Buy: BuyerP,
-        Sell: SellerP,
-      },{
-        initialRouteName: 'RegisterPage'
-      }
-    )
-  );
 
   const styles = StyleSheet.create({
     container: {
@@ -61,17 +63,44 @@ export default createAppContainer(
         alignSelf: 'center'
 
     },
-    SellerTxt: {
+    Seller: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 150
         
     },
-    BuyerTxt: {
+    Buyer: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 180
-        
+    },
+    buyerTxt: {
+        color: '#FFCE00',
+        textShadowColor: '#000',
+        textShadowOffset: { width: 0.5, height: 0.5 },
+        textShadowRadius: 3,
+        marginTop: 20,
+        fontSize: 50,
+        textAlign: 'center',
+        margin: 10,
+    },
+    sellerTxt: {
+        color: '#14CFEC',
+        textShadowColor: '#000',
+        textShadowOffset: { width: 0.5, height: 0.5 },
+        textShadowRadius: 3,
+        marginTop: 20,
+        fontSize: 50,
+        textAlign: 'center',
+        margin: 10,
     },
     topview: {
         height: '50%',

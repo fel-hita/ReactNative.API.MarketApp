@@ -45,43 +45,39 @@ const RootStack = createStackNavigator(
             screen: HomeScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Home',
-                header: null
               })
         },
         RegisterPage: {
             screen: RegisterPage,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
+                title: 'Registration',
                 header: null
               })
         },
         RegisterBuyer: {
             screen: RegisterBuyer,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
-                header: null
+                title: 'Buyer Registration',
               })
         },
         RegisterSeller: {
             screen: RegisterSeller,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
-                header: null
+                title: 'Seller Registration',
               })
         },
         DetailScreen: {
             screen: DetailScreen,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
-                header: null
+                title: 'Details',
               })
         }
     },
     {
         defaultNavigationOptions: {
-            headerTintColor: 'red',
+            headerTintColor: 'black',
             headerStyle: {
-                backgroundColor: '#0089fa'
+                backgroundColor: '#fff'
             }
         
         },

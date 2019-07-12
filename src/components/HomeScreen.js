@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class HomeScreen extends React.Component {
 
   renderItem = ({item}) => {
     return (
+      <View>
       <TouchableOpacity
           onPress={() => this.props.navigation.navigate('DetailScreen', { 
             title: item.title,
@@ -52,6 +54,7 @@ export default class HomeScreen extends React.Component {
           </Text>
         </View>
       </TouchableOpacity>
+      </View>
     )
   }
 
@@ -69,7 +72,6 @@ export default class HomeScreen extends React.Component {
         renderItem={this.renderItem}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={this.renderSeparator}
-        
         />
       </View>
     )

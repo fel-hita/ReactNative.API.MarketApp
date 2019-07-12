@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight, Platform } from 'react-native';
 import Slideshow from 'react-native-image-slider-show';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+import Divider from 'react-native-divider';
 
 export default class DetailScreen extends React.Component {
   
@@ -15,6 +15,10 @@ export default class DetailScreen extends React.Component {
       fontLoaded: false,
       position: 1,
       interval: null,
+      title: params.title,
+      price: params.price,
+      description: params.description,
+      category: params.category,
       dataSource: [
         {
           url: params.photo_main,
@@ -62,29 +66,21 @@ export default class DetailScreen extends React.Component {
               position={this.state.position}
               onPositionChanged={position => this.setState({ position })}
               onPress={() => this.state.clicked = true} />
-            </View>
-          <View style={styles.mContainer}>
-            
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.title}>{params.title}</Text>
-              <Text style={styles.price}>{params.price}</Text>
-            </View>
-            <Text style={styles.category}>{params.category}</Text>
-            <Text style={styles.description}>{params.description}</Text>
           </View>
-          <View style={styles.bContainer}>
-            <TouchableOpacity  activeOpacity = { .5 } onPress={this.SampleFunction}>
-              <LinearGradient 
-                colors={['#ff8008', '#ffc837', '#ff8008']}
-                style={styles.LinearGradientStyle}  
-                start={{x: 0, y: 1}}
-                end={{x: 1, y: 0.9}}
-                locations={[0, 0.3, 0.9]} >
-                <View>
-                  
-                </View>
-              </LinearGradient>
-            </TouchableOpacity>
+          <Divider borderColor="#000" color="#000" orientation="center">
+            Details
+          </Divider>
+          <View style={styles.mContainer}>
+            <LinearGradient
+              style={{ width: '100%', height: '100%' }}
+              colors={['#fff', '#fff']}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.title}>{this.state.title}</Text>
+                <Text style={styles.price}>{this.state.price} DH</Text>
+              </View>
+              <Text style={styles.category}>{this.state.category}</Text>
+              <Text style={styles.description}>{this.state.description}</Text>
+            </LinearGradient>
           </View>
         </View>
       );
@@ -94,7 +90,8 @@ export default class DetailScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection:'column'
+    flexDirection:'column',
+    backgroundColor: '#fff'
   },
   tContainer: {
     position: 'absolute',
@@ -104,12 +101,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   bContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   btnContainer: {
   },
@@ -122,21 +113,29 @@ const styles = StyleSheet.create({
   price: {
     top: 18,
     position: 'absolute',
-    right: 5,
+    right: 20,
     fontSize: 20,
     color: 'rgb(242, 207, 10)',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 0.5, height: 0.5 },
+    textShadowRadius: 1,
   },
   description: {
     fontSize: 30,
     color: 'black',
     textAlign: 'center',
-    marginTop: 30
+    marginTop: 30,
+    textShadowColor: '#000',
+    textShadowOffset: { width: 0.5, height: 0.8 },
+    textShadowRadius: 3,
   },
   category: {
-    color: '#648745',
     fontSize: 10,
     color: 'black',
     marginLeft: 5,
+    textShadowColor: '#00FF42',
+    textShadowOffset: { width: 0.5, height: 0.5 },
+    textShadowRadius: 3,
   },
   backgroundImg: {
     height: 300,
