@@ -101,6 +101,7 @@ export default class LoginScreen extends React.Component {
       .then(res => {
         if (isValid)
         {
+          console.log(res.token);
           this.props.navigation.navigate('HomeScreen', {
             token: res.token
           })

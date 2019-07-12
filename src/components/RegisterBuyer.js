@@ -176,6 +176,7 @@ export default class RegisterBuyer extends React.Component {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: '#ffffff',
+      
       alignItems: 'center',
       
     },
