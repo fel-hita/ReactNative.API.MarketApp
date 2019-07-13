@@ -37,7 +37,7 @@ const RootStack = createStackNavigator(
         LoginScreen: {
             screen: LoginScreen,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
+                title: 'Login',
                 header: null
               })
         },

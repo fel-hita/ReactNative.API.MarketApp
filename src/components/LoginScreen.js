@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Animated, Easing } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from 'react-native-elements';
+import * as SecureStore from 'expo-secure-store';
 
 export default class LoginScreen extends React.Component {
 
   constructor(props){
     super(props);
+    this.RotateValueHolder = new Animated.Value(0);
     this.state = {
       username:'',
       password:'',
@@ -16,12 +18,28 @@ export default class LoginScreen extends React.Component {
   }
 
   render() {
+    const RotateData = this.RotateValueHolder.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
     return (
       <View style={styles.container}>
         <LinearGradient
           style={{ position: 'absolute', width: '100%', height: '100%' }}
           colors={['#fff', '#adf3e2']}>
         </LinearGradient>
+          <View style={{ flex:1, flexDirection:'row', position: 'absolute', top: 100}}>
+            <Text style={{ fontSize: 30, color: "#0786ea",  }}>Resources{"\n"}To{"\n"}Waste</Text>
+            <Animated.Image
+          style={{
+            width: 90,
+            height: 90,
+            marginTop: 10,
+            transform: [{ rotate: RotateData }],
+          }}
+          source={require('../../assets/recycle.png')}
+        />
+          </View>
         <View style={styles.welcome}>
           <Text>
             <Text style={styles.welcomeLog}>LOG</Text><Text style={styles.welcomeTextIn}>IN</Text>
@@ -55,7 +73,7 @@ export default class LoginScreen extends React.Component {
             onPress={this._signin}>
           </Button>
         </View>
-        <Text style={styles.Notmember}>BECOME MEMBER</Text>
+        <Text style={styles.Notmember}>NEW VISITOR ?</Text>
         <View>
           <Button
             type="outline"
@@ -67,6 +85,20 @@ export default class LoginScreen extends React.Component {
         </View>
       </View>
     );
+  }
+
+  StartImageRotateFunction() {
+    this.RotateValueHolder.setValue(0);
+    Animated.timing(this.RotateValueHolder, {
+      toValue: 1,
+      duration: 5000,
+      easing: Easing.linear,
+      useNativeDriver: true
+    }).start(() => this.StartImageRotateFunction());
+  }
+
+  componentDidMount() {
+    this.StartImageRotateFunction();
   }
 
   _register = async () => {
@@ -99,10 +131,8 @@ export default class LoginScreen extends React.Component {
       .then(res => {
         if (isValid)
         {
-          console.log(res.token);
-          this.props.navigation.navigate('HomeScreen', {
-            token: res.token
-          })
+          SecureStore.setItemAsync('token',res.token.token);
+          this.props.navigation.navigate('HomeScreen')
         }
         else
         {
@@ -154,7 +184,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#42ffa8',
+    borderBottomColor: '#0786ea',
     textAlign: 'center'
   },
   btnEnter: {

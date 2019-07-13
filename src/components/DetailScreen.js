@@ -21,27 +21,32 @@ export default class DetailScreen extends React.Component {
       price: params.price,
       description: params.description,
       category: params.category,
+      base_url: params.base_url,
       dataSource: [
         {
           url: params.photo_main,
         }, {
-          url: params.photo_1 == '' ? params.photo_main : params.photo_1,
+          url: params.photo_1 == 'null' ? params.photo_main : `${params.base_url}${params.photo_1}`,
         }, {
-          url: params.photo_2 == '' ? params.photo_main : params.photo_2,
+          url: params.photo_2 == 'null' ? params.photo_main : `${params.base_url}${params.photo_2}`,
         }, {
-          url: params.photo_3 == '' ? params.photo_main : params.photo_3,
+          url: params.photo_3 == 'null' ? params.photo_main : `${params.base_url}${params.photo_3}`,
         }, {
-          url: params.photo_4 == '' ? params.photo_main : params.photo_4,
+          url: params.photo_4 == 'null' ? params.photo_main : `${params.base_url}${params.photo_4}`,
         }, {
-          url: params.photo_5 == '' ? params.photo_main : params.photo_5,
+          url: params.photo_5 == 'null' ? params.photo_main : `${params.base_url}${params.photo_5}`,
         }, {
-          url: params.photo_6 == '' ? params.photo_main : params.photo_6
+          url: params.photo_6 == 'null' ? params.photo_main : `${params.base_url}${params.photo_6}`,
         }
       ],
     };
   }
 
   async componentWillMount() {
+  }
+
+  async componentDidMount() {
+    console.log(this.state.dataSource);
   }
 
   render() {
@@ -59,19 +64,16 @@ export default class DetailScreen extends React.Component {
             Details
           </Divider>
           <View style={styles.mContainer}>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.title}>{this.state.title}</Text>
-              </View>
-              <Text style={styles.category}>{this.state.category}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.title}>{this.state.title}</Text>
               <Text style={styles.price}>{this.state.price} DH</Text>
-              <ScrollView style={{ marginBottom: 5, height: '28%' }}>
+            </View>
+            <Text style={styles.category}>{this.state.category}</Text>
+            <ScrollView style={{ marginBottom: 5, height: '28%' }}>
               <Text style={styles.description}>blablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdad</Text>
-              </ScrollView>
+            </ScrollView>
           </View>
           <View style={{ marginBottom: 5, flex: 1,justifyContent: 'flex-end'}}>
-            <Divider borderColor="#000" color="#000" orientation="center">
-              BIDDING
-            </Divider>
           </View>
           <View style={{ alignItems:'center', marginBottom: 20 }}>
             <Button
@@ -105,19 +107,15 @@ const styles = StyleSheet.create({
   btnContainer: {
   },
   title: {
-    marginTop: 10,
     marginLeft: 5,
-    fontSize: 30,
+    fontSize: 20,
     color: 'rgb(0, 0, 0)',
   },
   price: {
     position: 'absolute',
-    right: 20,
-    fontSize: 20,
-    color: 'rgb(242, 207, 10)',
-    textShadowColor: '#000',
-    textShadowOffset: { width: 0.5, height: 0.5 },
-    textShadowRadius: 1,
+    right: 10,
+    fontSize: 25,
+    color: 'black',
   },
   description: {
     fontSize: 30,
@@ -128,11 +126,8 @@ const styles = StyleSheet.create({
   category: {
     marginLeft: 10,
     fontSize: 10,
-    color: '#30B1F5',
+    color: 'black',
     marginLeft: 5,
-    textShadowColor: '#00FF42',
-    textShadowOffset: { width: 0.5, height: 0.5 },
-    textShadowRadius: 3,
   },
   backgroundImg: {
     height: 300,
