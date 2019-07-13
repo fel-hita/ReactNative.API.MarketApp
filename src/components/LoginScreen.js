@@ -29,12 +29,12 @@ export default class LoginScreen extends React.Component {
           colors={['#fff', '#adf3e2']}>
         </LinearGradient>
           <View style={{ flex:1, flexDirection:'row', position: 'absolute', top: 100}}>
-            <Text style={{ fontSize: 30, color: "#0786ea",  }}>Resources{"\n"}To{"\n"}Waste</Text>
+            <Text style={{ fontSize: 30, color: "#0786ea",  }}>Waste{"\n"}To{"\n"}Resources</Text>
             <Animated.Image
           style={{
             width: 90,
             height: 90,
-            marginTop: 10,
+            marginTop: 5,
             transform: [{ rotate: RotateData }],
           }}
           source={require('../../assets/recycle.png')}
@@ -91,7 +91,7 @@ export default class LoginScreen extends React.Component {
     this.RotateValueHolder.setValue(0);
     Animated.timing(this.RotateValueHolder, {
       toValue: 1,
-      duration: 5000,
+      duration: 10000,
       easing: Easing.linear,
       useNativeDriver: true
     }).start(() => this.StartImageRotateFunction());

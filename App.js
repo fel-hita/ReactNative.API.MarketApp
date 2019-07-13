@@ -6,6 +6,7 @@ import RegisterPage from './src/components/RegisterPage';
 import RegisterSeller from './src/components/RegisterSeller';
 import RegisterBuyer from './src/components/RegisterBuyer';
 import DetailScreen from './src/components/DetailScreen';
+import DashBoard from './src/components/DashBoard'
 import * as Font from 'expo-font';
 
 export default class App extends React.Component {
@@ -45,6 +46,7 @@ const RootStack = createStackNavigator(
             screen: HomeScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Home',
+                headerLeft: null
               })
         },
         RegisterPage: {
@@ -70,6 +72,9 @@ const RootStack = createStackNavigator(
             navigationOptions: ({navigation}) => ({
                 title: 'Details',
               })
+        },
+        DashBoard: {
+            screen: DashBoard
         }
     },
     {

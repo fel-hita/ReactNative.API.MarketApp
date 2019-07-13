@@ -188,7 +188,7 @@ export default class RegisterSeller extends React.Component {
         top: 600
     },
     input: {
-      width: 150,
+      width: 200,
       margin: 15,
       height: 40,
       padding: 5,

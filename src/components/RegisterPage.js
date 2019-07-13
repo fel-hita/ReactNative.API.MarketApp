@@ -10,7 +10,7 @@ export default class RegisterPage extends React.Component {
                 <View style={styles.topview}>
                     <LinearGradient
                         style={{ position: 'absolute', width: '100%', height: '100%' }}
-                        colors={['#FFCE00', '#fff']}>
+                        colors={['#ffCE00', '#fff']}>
 
                         <TouchableOpacity
                             style={styles.Buyer}
