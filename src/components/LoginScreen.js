@@ -70,7 +70,7 @@ export default class LoginScreen extends React.Component {
             type="outline"
             title="LOGIN"
             style={styles.btnEnterText}
-            onPress={this._signin}>
+            onPress={this.x_signin}>
           </Button>
         </View>
         <Text style={styles.Notmember}>NEW VISITOR ?</Text>
@@ -106,6 +106,10 @@ export default class LoginScreen extends React.Component {
   }
 
   _signin = async () => {
+    this.props.navigation.navigate('DashBoard')
+  }
+
+  x_signin = async () => {
     const user = "hrazani";
     const pass = "qwerty";
     const api_url = "http://10.12.9.7:8000/api/api-token-auth/";
@@ -132,7 +136,7 @@ export default class LoginScreen extends React.Component {
         if (isValid)
         {
           SecureStore.setItemAsync('token',res.token.token);
-          this.props.navigation.navigate('HomeScreen')
+          this.props.navigation.navigate('DashBoard')
         }
         else
         {

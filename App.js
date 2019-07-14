@@ -74,7 +74,11 @@ const RootStack = createStackNavigator(
               })
         },
         DashBoard: {
-            screen: DashBoard
+            screen: DashBoard,
+            navigationOptions: ({navigation}) => ({
+                title: 'DashBoard',
+                headerLeft: null
+              })
         }
     },
     {
