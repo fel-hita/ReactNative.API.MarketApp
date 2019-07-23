@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Animated, Easing } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Animated, Easing, ImageBackground } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
@@ -24,12 +24,19 @@ export default class LoginScreen extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <LinearGradient
-          style={{ position: 'absolute', width: '100%', height: '100%' }}
-          colors={['#fff', '#adf3e2']}>
-        </LinearGradient>
+        <ImageBackground
+          style={styles.backStyle}
+          source={require('../../assets/background.png')}
+          resizeMode='cover'>
+        </ImageBackground>
           <View style={{ flex:1, flexDirection:'row', position: 'absolute', top: 100}}>
-            <Text style={{ fontSize: 30, color: "#0786ea",  }}>Waste{"\n"}To{"\n"}Resources</Text>
+            <Text
+            style={{ fontSize: 30,
+            color: "#0786ea",
+            textShadowColor: '#000',
+            textShadowOffset: { width: 0.5, height: 0.5 },
+            textShadowRadius: 1, }}>
+              Waste{"\n"}To{"\n"}Resources</Text>
             <Animated.Image
           style={{
             width: 90,
@@ -70,7 +77,7 @@ export default class LoginScreen extends React.Component {
             type="outline"
             title="LOGIN"
             style={styles.btnEnterText}
-            onPress={this.x_signin}>
+            onPress={this._signin}>
           </Button>
         </View>
         <Text style={styles.Notmember}>NEW VISITOR ?</Text>
@@ -106,10 +113,6 @@ export default class LoginScreen extends React.Component {
   }
 
   _signin = async () => {
-    this.props.navigation.navigate('DashBoard')
-  }
-
-  x_signin = async () => {
     const user = "hrazani";
     const pass = "qwerty";
     const api_url = "http://10.12.9.7:8000/api/api-token-auth/";
@@ -136,7 +139,7 @@ export default class LoginScreen extends React.Component {
         if (isValid)
         {
           SecureStore.setItemAsync('token',res.token.token);
-          this.props.navigation.navigate('DashBoard')
+          this.props.navigation.navigate('HomeScreen')
         }
         else
         {
@@ -157,10 +160,10 @@ const styles = StyleSheet.create({
   welcomeTextIn: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#14CFEC',
-    textShadowColor: '#00FF42',
+    color: '#00d600',
+    textShadowColor: '#000',
     textShadowOffset: { width: 0.5, height: 0.5 },
-    textShadowRadius: 3,
+    textShadowRadius: 1,
   },
   welcomeLog: {
     fontSize: 20,
@@ -172,10 +175,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   Notmember: {
-    color: '#14CFEC',
-    textShadowColor: '#00FF42',
+    color: '#00d600',
+    textShadowColor: '#000',
     textShadowOffset: { width: 0.5, height: 0.5 },
-    textShadowRadius: 3,
+    textShadowRadius: 1,
     marginTop: 100,
     fontSize: 20,
     textAlign: 'center',
@@ -201,4 +204,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center'
   },
+  backStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  }
 });

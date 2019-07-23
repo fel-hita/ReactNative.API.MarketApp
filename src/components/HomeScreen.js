@@ -44,12 +44,21 @@ export default class HomeScreen extends React.Component {
         <Image style={{width: 100, height: 100, margin: 5}}
           source={{ uri: `${this.state.base_url}${item.photo_main}` }}
         />
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{ fontSize: 18, color: 'green', marginBottom: 15, marginLeft: 15}}>
+        <View style={{flex: 1}}>
+          <Text style={{ fontSize: 18, color: 'green'}}>
             {item.title}
           </Text>
-          <Text style={{ position: 'absolute', right: 30, fontSize: 16, color: 'black'}}>
-            {item.price} DH
+          <Text style={{ fontSize: 20, color: 'black', textAlign: 'right', marginRight: 50}}>
+            Casablanca
+          </Text>
+          <Text>
+            {item.category}
+          </Text>
+          <Text style={{ fontSize: 16, color: 'black', textAlign: 'right', marginRight: 10}}>
+            Starting Price : {item.price} DH
+          </Text>
+          <Text style={{ fontSize: 16, color: 'black', textAlign: 'right', marginRight: 10}}>
+            Current Price : {item.price} DH
           </Text>
         </View>
       </TouchableOpacity>
@@ -99,6 +108,9 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+    const token = SecureStore.getItemAsync('token');
+    if (!token)
+      this.props.navigation.navigate('LoginScreen')
     this.getApiList();
   }
 }

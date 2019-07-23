@@ -1,12 +1,13 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 import LoginScreen from './src/components/LoginScreen';
 import HomeScreen from './src/components/HomeScreen';
 import RegisterPage from './src/components/RegisterPage';
 import RegisterSeller from './src/components/RegisterSeller';
 import RegisterBuyer from './src/components/RegisterBuyer';
 import DetailScreen from './src/components/DetailScreen';
-import DashBoard from './src/components/DashBoard'
+import DashBoard from './src/components/DashBoard';
+import AddProduct from './src/components/AddProduct';
 import * as Font from 'expo-font';
 
 export default class App extends React.Component {
@@ -36,8 +37,10 @@ export default class App extends React.Component {
 const RootStack = createStackNavigator(
     {
         LoginScreen: {
+            //screen: AddProduct,
             screen: LoginScreen,
             navigationOptions: ({navigation}) => ({
+                title: 'Register Product',
                 title: 'Login',
                 header: null
               })
@@ -79,6 +82,12 @@ const RootStack = createStackNavigator(
                 title: 'DashBoard',
                 headerLeft: null
               })
+        },
+        AddProduct: {
+            screen: AddProduct,
+            navigationOptions: ({navigation}) => ({
+                title: 'Add Product'
+              })
         }
     },
     {
@@ -87,7 +96,6 @@ const RootStack = createStackNavigator(
             headerStyle: {
                 backgroundColor: '#fff'
             }
-        
         },
         initialRouteName: 'LoginScreen'
     }

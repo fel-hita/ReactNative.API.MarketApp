@@ -54,7 +54,7 @@ export default class DetailScreen extends React.Component {
         <View style={styles.container}>
           <View styles={styles.tContainer}>
             <Slideshow
-              height={300}
+              height={200}
               dataSource={this.state.dataSource}
               position={this.state.position}
               onPositionChanged={position => this.setState({ position })}
@@ -64,14 +64,47 @@ export default class DetailScreen extends React.Component {
             Details
           </Divider>
           <View style={styles.mContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.title}>{this.state.title}</Text>
-              <Text style={styles.price}>{this.state.price} DH</Text>
-            </View>
+            <Text style={styles.title}>{this.state.title}</Text>
             <Text style={styles.category}>{this.state.category}</Text>
-            <ScrollView style={{ marginBottom: 5, height: '28%' }}>
+            <View style={{ flex: 1 }}>
+              <View style={styles.alignContainer}>
+                <View style={ styles.leftfields }>
+                  <Text style= { styles.midtext }>Starting price 546541 DH</Text>
+                </View>
+                <View  style={ styles.rightfields }>
+                  <Text style= { styles.midtext }>Post date</Text>
+                </View>
+              </View>
+              <View style={ styles.alignContainer }>
+                <View style={ styles.leftfields }>
+                  <Text style= { styles.midtext }>Current price 546541 DH</Text>
+                </View>
+                <View style={ styles.rightfields }>
+                  <Text style= { styles.midtext }>Deadline</Text>
+                </View>
+              </View>
+              <View style={ styles.alignContainer }>
+                <View style={ styles.leftfields }>
+                <Text style= { styles.midtext }>Casablanca / 20250</Text>
+                  </View>
+                <View style={ styles.rightfields }>
+                  <Text style= { styles.midtext }>Quantity</Text>
+                </View>
+              </View>
+              <View style={ styles.alignContainer }>
+                <View style={ styles.leftfields }>
+                  <Text style= { styles.midtext }>Delivery method</Text>
+                </View>
+                <View  style={ styles.rightfields }>
+                  <Text style= { styles.midtext }>Seller name</Text>
+                </View>
+              </View>
+            </View>
+            <View style={{ marginTop: 10}}>
+            <ScrollView style={{ height: '50%' }}>
               <Text style={styles.description}>blablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdad</Text>
             </ScrollView>
+            </View>
           </View>
           <View style={{ marginBottom: 5, flex: 1,justifyContent: 'flex-end'}}>
           </View>
@@ -107,6 +140,8 @@ const styles = StyleSheet.create({
   btnContainer: {
   },
   title: {
+    textAlign: 'center',
+    fontWeight: 'bold',
     marginLeft: 5,
     fontSize: 20,
     color: 'rgb(0, 0, 0)',
@@ -121,11 +156,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'black',
     textAlign: 'center',
-    marginTop: 30,
+    marginBottom: 30,
   },
   category: {
+    textAlign: 'center',
     marginLeft: 10,
-    fontSize: 10,
+    fontSize: 15,
     color: 'black',
     marginLeft: 5,
   },
@@ -139,6 +175,12 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 40
   },
+  leftfields: {
+    marginLeft: 10
+  },
+  rightfields: {
+    marginRight: 10,
+  },
   btnBid: {
     width: 100,
   },
@@ -148,4 +190,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center'
   },
+  midtext: {
+    color: '#004f8c'
+  },
+  alignContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
 });

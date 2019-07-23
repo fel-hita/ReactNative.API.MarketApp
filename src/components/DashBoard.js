@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, FlatList } from 'react-native';
+import { createDrawerNavigator, SafeAreaView, DrawerItems } from 'react-navigation';
+import LoginScreen from './LoginScreen';
 
 export default class DashBoard extends Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -51,19 +53,45 @@ export default class DashBoard extends Component {
   }
 }
 
+const CustomDrawerContentComponent = props => (
+  <ScrollView>
+    <SafeAreaView
+    style={styles.container}
+    forceInset={{ top: 'always', horizontal: 'never' }}>
+    <DrawerItems {...props} />
+    <Image
+      style={styles.image}
+      source={ require('../../assets/settings.png') }
+      />
+      </SafeAreaView>
+  </ScrollView>
+);
+
+const Drawer = createDrawerNavigator(
+  {
+    Login: {
+      screen: LoginScreen
+    },
+  },
+  {
+    drawerType: 'slide',
+    drawerPosition: 'right',
+    drawerWidth: 400,
+    contentComponent: CustomDrawerContentComponent
+  }
+)
+
 const styles = StyleSheet.create({
   container:{
     flex:1,
     marginTop:20,
   },
   list: {
-    //paddingHorizontal: 5,
     backgroundColor:"#E6E6E6",
   },
   listContainer:{
     alignItems:'center'
   },
-  /******** card **************/
   card:{
     marginHorizontal:2,
     marginVertical:2,
@@ -111,4 +139,4 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20, 
   }
-});     
+});
