@@ -33,7 +33,7 @@ export default class RegisterBuyer extends React.Component {
     render(){
       return(
         <View style={styles.container}>
-          <ScrollView style={styles.scrollinput}>
+          <ScrollView style={styles.scrollinput} contentContainerStyle={{ flexGrow: 1}}>
           <TextInput
               style={styles.input}
               autoCapitalize='none'
@@ -163,11 +163,6 @@ export default class RegisterBuyer extends React.Component {
               onChangeText={(country)=>this.setState({country})}
           />
           </ScrollView>
-          <View style={{ marginTop: 15 }}>
-            <Divider borderColor="#000" color="#000" orientation="center">
-              SCROLL DOWN
-          </Divider>
-          </View>
         </View>
       )
     }
@@ -176,9 +171,6 @@ export default class RegisterBuyer extends React.Component {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: '#ffffff',
-      
-      alignItems: 'center',
-      
     },
     welcome: {
         marginTop: 20,
@@ -189,7 +181,6 @@ export default class RegisterBuyer extends React.Component {
         top: 600
     },
     input: {
-      width: 200,
       margin: 15,
       height: 40,
       padding: 5,
@@ -199,6 +190,5 @@ export default class RegisterBuyer extends React.Component {
     },
     scrollinput: {
       marginTop: 10,
-      height: '85%'
     }
 })

@@ -1,8 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Animated, Easing, ImageBackground } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
+import { Platform } from '@unimodules/core';
+
+const buttonTheme = {
+  colors: {
+    primary: 'pink',
+  }
+}
 
 export default class LoginScreen extends React.Component {
 
@@ -26,16 +32,12 @@ export default class LoginScreen extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           style={styles.backStyle}
-          source={require('../../assets/background.png')}
-          resizeMode='cover'>
+          source={require('../../assets/backdown.jpg')}
+          resizeMode='contain'>
         </ImageBackground>
-          <View style={{ flex:1, flexDirection:'row', position: 'absolute', top: 100}}>
+          <View style={styles.headerStyle}>
             <Text
-            style={{ fontSize: 30,
-            color: "#0786ea",
-            textShadowColor: '#000',
-            textShadowOffset: { width: 0.5, height: 0.5 },
-            textShadowRadius: 1, }}>
+            style={{ fontSize: 30, color: "#21B6A8"}}>
               Waste{"\n"}To{"\n"}Resources</Text>
             <Animated.Image
           style={{
@@ -55,6 +57,7 @@ export default class LoginScreen extends React.Component {
         <TextInput style={styles.input}
           autoCapitalize='none'
           placeholder="Username"
+          placeholderTextColor="#085f63" 
           autoCorrect={false}
           editable={true}
           multiline={true}
@@ -64,6 +67,7 @@ export default class LoginScreen extends React.Component {
         />
         <TextInput style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#085f63" 
           password={true}
           secureTextEntry={true}
           returnKeyType='go'
@@ -72,23 +76,26 @@ export default class LoginScreen extends React.Component {
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
         />
-        <View>
-          <Button
-            type="outline"
-            title="LOGIN"
-            style={styles.btnEnterText}
-            onPress={this._signin}>
-          </Button>
-        </View>
-        <Text style={styles.Notmember}>NEW VISITOR ?</Text>
-        <View>
-          <Button
-            type="outline"
-            title="REGISTER"
-            style={styles.btnEnterText}
-            onPress={this._register}
-          >
-          </Button>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View style={{ right: 20 }}>
+            <Button
+              type="clear"
+              color="#000"
+              title="LOGIN"
+              style={styles.btnEnterText}
+              onPress={this._signin}>
+            </Button>
+          </View>
+          <View style={{ left: 20 }}>
+            <Button
+              type="clear"
+              color="#000"
+              title="REGISTER"
+              style={styles.btnEnterText}
+              onPress={this._register}
+            >
+            </Button>
+          </View>
         </View>
       </View>
     );
@@ -129,7 +136,7 @@ export default class LoginScreen extends React.Component {
       })
     })
     .then(response => {
-      isValid= response.ok
+      isValid = response.ok
       return response.json()
     })
       .then(data => ({
@@ -152,7 +159,7 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#1F1F1F',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
@@ -160,26 +167,25 @@ const styles = StyleSheet.create({
   welcomeTextIn: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#00d600',
+    color: '#18A558',
     textShadowColor: '#000',
     textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 1,
   },
   welcomeLog: {
+    color: '#085f63',
     fontSize: 20,
     textAlign: 'center',
   },
   welcome: {
     flexDirection: 'row',
-    marginTop: 150,
-    margin: 10,
+    marginTop: 60
   },
   Notmember: {
     color: '#00d600',
     textShadowColor: '#000',
     textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 1,
-    marginTop: 100,
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
@@ -191,7 +197,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#0786ea',
+    borderBottomColor: '#18A558',
     textAlign: 'center'
   },
   btnEnter: {
@@ -207,6 +213,19 @@ const styles = StyleSheet.create({
   backStyle: {
     position: 'absolute',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    top: 225
+  },
+  newText: {
+    color:"#085f63",
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  headerStyle: {
+    flex:1,
+    position: 'absolute',
+    flexDirection:'row',
+    top: Platform.OS === 'ios' ? 100 : 90
   }
 });
