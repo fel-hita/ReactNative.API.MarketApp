@@ -4,12 +4,6 @@ import { Button } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from '@unimodules/core';
 
-const buttonTheme = {
-  colors: {
-    primary: 'pink',
-  }
-}
-
 export default class LoginScreen extends React.Component {
 
   constructor(props){
@@ -37,13 +31,13 @@ export default class LoginScreen extends React.Component {
         </ImageBackground>
           <View style={styles.headerStyle}>
             <Text
-            style={{ fontSize: 30, color: "#21B6A8"}}>
-              Waste{"\n"}To{"\n"}Resources</Text>
+            style={{ fontSize: 30, color: "#2B86CE"}}>
+              WASTE{"\n"}TO{"\n"}RESOURCES</Text>
             <Animated.Image
           style={{
-            width: 90,
-            height: 90,
-            marginTop: 5,
+            width: 100,
+            height: 100,
+            marginLeft: 15,
             transform: [{ rotate: RotateData }],
           }}
           source={require('../../assets/recycle.png')}
@@ -51,7 +45,7 @@ export default class LoginScreen extends React.Component {
           </View>
         <View style={styles.welcome}>
           <Text>
-            <Text style={styles.welcomeLog}>LOG</Text><Text style={styles.welcomeTextIn}>IN</Text>
+            <Text style={styles.welcomeLog}></Text><Text style={styles.welcomeTextIn}>Welcome</Text>
           </Text>
         </View>
         <TextInput style={styles.input}
@@ -86,7 +80,7 @@ export default class LoginScreen extends React.Component {
               onPress={this._signin}>
             </Button>
           </View>
-          <View style={{ left: 20 }}>
+          <View style={{ position: 'absolute', right: 10 }}>
             <Button
               type="clear"
               color="#000"
@@ -120,39 +114,7 @@ export default class LoginScreen extends React.Component {
   }
 
   _signin = async () => {
-    const user = "hrazani";
-    const pass = "qwerty";
-    const api_url = "http://10.12.9.7:8000/api/api-token-auth/";
-
-    await fetch( api_url, {
-      method: "POST",
-      headers: {
-        'Accept':'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'username': user,
-        'password': pass
-      })
-    })
-    .then(response => {
-      isValid = response.ok
-      return response.json()
-    })
-      .then(data => ({
-        token: data,
-      }))
-      .then(res => {
-        if (isValid)
-        {
-          SecureStore.setItemAsync('token',res.token.token);
-          this.props.navigation.navigate('HomeScreen')
-        }
-        else
-        {
-          alert('Invalid Login/Password');
-        }
-    });
+    this.props.navigation.navigate('HomeScreen');
   }
 }
 
@@ -165,21 +127,21 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   welcomeTextIn: {
-    fontSize: 20,
+    fontSize: 23,
     textAlign: 'center',
-    color: '#18A558',
+    color: '#03CB69',
     textShadowColor: '#000',
     textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 1,
   },
   welcomeLog: {
-    color: '#085f63',
-    fontSize: 20,
+    color: '#03CB69',
+    fontSize: 23,
     textAlign: 'center',
   },
   welcome: {
     flexDirection: 'row',
-    marginTop: 60
+    marginTop: 80
   },
   Notmember: {
     color: '#00d600',

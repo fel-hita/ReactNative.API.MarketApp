@@ -28,8 +28,8 @@ export default class AddProduct extends React.Component {
       password: '',
       cpassword: '',
       email: '',
-      firstname: '',
-      lastname: '',
+      category: '',
+      Price: '',
       cellphone: '',
       address: '',
       town: '',
@@ -56,7 +56,7 @@ export default class AddProduct extends React.Component {
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
-      this.setState({ checkmark: '✔'})
+      this.setState({ checkmark: '✔'});
     }
     else {
     }
@@ -164,7 +164,7 @@ export default class AddProduct extends React.Component {
             editable={true}
             multiline={true}
             maxLength={40}
-            placeholder="Username"
+            placeholder="Product name"
             value={this.state.username}
             onChangeText={(username) => this.setState({ username })}
           />
@@ -224,24 +224,24 @@ export default class AddProduct extends React.Component {
           <TextInput
             style={styles.input}
             autoCapitalize='none'
-            placeholder="Email"
+            placeholder="Description"
             autoCorrect={false}
             editable={true}
             multiline={true}
-            maxLength={40}
+            maxLength={1000}
             value={this.state.email}
             onChangeText={(email) => this.setState({ email })}
           />
           <TextInput
             style={styles.input}
             autoCapitalize='none'
-            placeholder="Firstname"
+            placeholder="Category"
             autoCorrect={false}
             editable={true}
             multiline={true}
             maxLength={40}
-            value={this.state.firstname}
-            onChangeText={(firstname) => this.setState({ firstname })}
+            value={this.state.category}
+            onChangeText={(category) => this.setState({ category })}
           />
           <TextInput
             style={styles.input}
@@ -250,9 +250,9 @@ export default class AddProduct extends React.Component {
             editable={true}
             multiline={true}
             maxLength={40}
-            value={this.state.lastname}
-            placeholder="Lastname"
-            onChangeText={(lastname) => this.setState({ lastname })}
+            value={this.state.Price}
+            placeholder="Price"
+            onChangeText={(Price) => this.setState({ Price })}
           />
           <TextInput
             style={styles.input}
@@ -275,17 +275,6 @@ export default class AddProduct extends React.Component {
             placeholder="Address"
             value={this.state.address}
             onChangeText={(address) => this.setState({ address })}
-          />
-          <TextInput
-            style={styles.input}
-            autoCapitalize='none'
-            autoCorrect={false}
-            editable={true}
-            multiline={true}
-            maxLength={40}
-            value={this.state.town}
-            placeholder="Town"
-            onChangeText={(town) => this.setState({ town })}
           />
           <TextInput
             style={styles.input}

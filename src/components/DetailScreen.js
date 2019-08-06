@@ -5,7 +5,6 @@ import Divider from 'react-native-divider';
 import { Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 export default class DetailScreen extends React.Component {
   
   constructor(props) {
@@ -18,25 +17,20 @@ export default class DetailScreen extends React.Component {
       position: 0,
       interval: null,
       title: params.title,
-      price: params.price,
+      sprice: params.sprice,
+      cprice: params.cprice,
       description: params.description,
       category: params.category,
       base_url: params.base_url,
+      delivery: params.delivery,
+      headerImage: params.photo_main,
       dataSource: [
         {
           url: params.photo_main,
         }, {
-          url: params.photo_1 == 'null' ? params.photo_main : `${params.base_url}${params.photo_1}`,
+          url: params.photo_1 == 'null' ? params.photo_main : params.photo_1,
         }, {
-          url: params.photo_2 == 'null' ? params.photo_main : `${params.base_url}${params.photo_2}`,
-        }, {
-          url: params.photo_3 == 'null' ? params.photo_main : `${params.base_url}${params.photo_3}`,
-        }, {
-          url: params.photo_4 == 'null' ? params.photo_main : `${params.base_url}${params.photo_4}`,
-        }, {
-          url: params.photo_5 == 'null' ? params.photo_main : `${params.base_url}${params.photo_5}`,
-        }, {
-          url: params.photo_6 == 'null' ? params.photo_main : `${params.base_url}${params.photo_6}`,
+          url: params.photo_2 == 'null' ? params.photo_main : params.photo_2,
         }
       ],
     };
@@ -46,10 +40,10 @@ export default class DetailScreen extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(this.state.dataSource);
   }
 
   render() {
+    console.log(this.state.dataSource[1]);
       return (
         <View style={styles.container}>
           <View styles={styles.tContainer}>
@@ -60,7 +54,7 @@ export default class DetailScreen extends React.Component {
               onPositionChanged={position => this.setState({ position })}
               onPress={() => this.state.clicked = true} />
           </View>
-          <Divider borderColor="#000" color="#000" orientation="center">
+          <Divider borderColor="#fff" color="#fff" orientation="center">
             Details
           </Divider>
           <View style={styles.mContainer}>
@@ -69,18 +63,18 @@ export default class DetailScreen extends React.Component {
             <View style={{ flex: 1 }}>
               <View style={styles.alignContainer}>
                 <View style={ styles.leftfields }>
-                  <Text style= { styles.midtext }>Starting price 546541 DH</Text>
+                  <Text style= { styles.midtext }>Starting price : {this.state.sprice} DH</Text>
                 </View>
                 <View  style={ styles.rightfields }>
-                  <Text style= { styles.midtext }>Post date</Text>
+                  <Text style= { styles.midtext }>Post date : 2019/09/30</Text>
                 </View>
               </View>
               <View style={ styles.alignContainer }>
                 <View style={ styles.leftfields }>
-                  <Text style= { styles.midtext }>Current price 546541 DH</Text>
+                  <Text style= { styles.midtext }>Current price : {this.state.cprice} DH</Text>
                 </View>
                 <View style={ styles.rightfields }>
-                  <Text style= { styles.midtext }>Deadline</Text>
+                  <Text style= { styles.midtext }>Deadline : non set</Text>
                 </View>
               </View>
               <View style={ styles.alignContainer }>
@@ -88,32 +82,34 @@ export default class DetailScreen extends React.Component {
                 <Text style= { styles.midtext }>Casablanca / 20250</Text>
                   </View>
                 <View style={ styles.rightfields }>
-                  <Text style= { styles.midtext }>Quantity</Text>
+                  <Text style= { styles.midtext }>Quantity : 1</Text>
                 </View>
               </View>
               <View style={ styles.alignContainer }>
                 <View style={ styles.leftfields }>
-                  <Text style= { styles.midtext }>Delivery method</Text>
+                  <Text style= { styles.midtext }>Delivery method : {this.state.delivery}</Text>
                 </View>
                 <View  style={ styles.rightfields }>
-                  <Text style= { styles.midtext }>Seller name</Text>
+                  <Text style= { styles.midtext }>Seller : TestSeller</Text>
                 </View>
               </View>
             </View>
             <View style={{ marginTop: 10}}>
-            <ScrollView style={{ height: '50%' }}>
-              <Text style={styles.description}>blablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdadblablablablalballalf,sladkasdkasd'asdad</Text>
+            <ScrollView style={{ height: '37%' }}>
+              <Text style={styles.description}>{this.state.description}</Text>
             </ScrollView>
             </View>
           </View>
           <View style={{ marginBottom: 5, flex: 1,justifyContent: 'flex-end'}}>
           </View>
-          <View style={{ alignItems:'center', marginBottom: 20 }}>
+          <View style={{ alignItems:'center', marginBottom: 10 }}>
             <Button
               type="outline"
-              title="BID NOW"
+              title="BID PAGE"
               style={styles.btnBid}
-              onPress={this._bidNow}
+              onPress={() => this.props.navigation.navigate('Bidding', {
+                headerImage: this.state.headerImage,
+              })}
             >
             </Button>
           </View>
@@ -126,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:'column',
-    backgroundColor: '#fff'
+    backgroundColor: '#3A3E43'
   },
   tContainer: {
     position: 'absolute',
@@ -144,7 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 5,
     fontSize: 20,
-    color: 'rgb(0, 0, 0)',
+    color: '#d04925',
   },
   price: {
     position: 'absolute',
@@ -153,8 +149,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   description: {
-    fontSize: 30,
-    color: 'black',
+    fontSize: 20,
+    color: '#fff',
     textAlign: 'center',
     marginBottom: 30,
   },
@@ -162,7 +158,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 10,
     fontSize: 15,
-    color: 'black',
+    color: '#B0DB43',
     marginLeft: 5,
   },
   backgroundImg: {
@@ -191,7 +187,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   midtext: {
-    color: '#004f8c'
+    color: '#fff'
   },
   alignContainer: {
     flex: 1,

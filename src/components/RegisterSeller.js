@@ -19,8 +19,8 @@ export default class RegisterSeller extends React.Component {
       password:'',
       cpassword:'',
       email: '',
-      firstname:'',
-      lastname:'',
+      category:'',
+      Price:'',
       cellphone:'',
       address:'',
       town:'',
@@ -87,13 +87,13 @@ export default class RegisterSeller extends React.Component {
           <TextInput
               style={styles.input}
               autoCapitalize='none'
-              placeholder="Firstname"
+              placeholder="category"
               autoCorrect={false}
               editable={true}
               multiline={true}
               maxLength={40}
-              value={this.state.firstname}
-              onChangeText={(firstname)=>this.setState({firstname})}
+              value={this.state.category}
+              onChangeText={(category)=>this.setState({category})}
             />
             <TextInput
               style={styles.input}
@@ -102,9 +102,9 @@ export default class RegisterSeller extends React.Component {
               editable={true}
               multiline={true}
               maxLength={40}
-              value={this.state.lastname}
-              placeholder="Lastname"
-              onChangeText={(lastname)=>this.setState({lastname})}
+              value={this.state.Price}
+              placeholder="Price"
+              onChangeText={(Price)=>this.setState({Price})}
             />
             <TextInput
               style={styles.input}

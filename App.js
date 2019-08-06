@@ -2,13 +2,13 @@ import React from 'react';
 import { createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 import LoginScreen from './src/components/LoginScreen';
 import HomeScreen from './src/components/HomeScreen';
+import Bidding from './src/components/Bidding';
 import RegisterPage from './src/components/RegisterPage';
 import RegisterSeller from './src/components/RegisterSeller';
 import RegisterBuyer from './src/components/RegisterBuyer';
 import DetailScreen from './src/components/DetailScreen';
 import DashBoard from './src/components/DashBoard';
 import AddProduct from './src/components/AddProduct';
-import * as Font from 'expo-font';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -16,17 +16,6 @@ export default class App extends React.Component {
         this.state= {
             fontLoaded: false,
         }
-    }
-
-    _loadAssetsAsync = async () => {
-        await Font.loadAsync({
-          'open-sans-bold': require('./assets/fonts/open-sans/OpenSans-Bold.ttf'),
-        });
-        this.setState({ fontLoaded: true });
-      }
-
-    async componentDidMount() {
-        this._loadAssetsAsync();
     }
 
     render () {
@@ -37,8 +26,8 @@ export default class App extends React.Component {
 const RootStack = createStackNavigator(
     {
         LoginScreen: {
-            //screen: AddProduct,
-            screen: LoginScreen,
+            screen: HomeScreen,
+            //screen: LoginScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Register Product',
                 title: 'Login',
@@ -48,8 +37,7 @@ const RootStack = createStackNavigator(
         HomeScreen: {
             screen: HomeScreen,
             navigationOptions: ({navigation}) => ({
-                title: 'Home',
-                headerLeft: null
+                header: null
               })
         },
         RegisterPage: {
@@ -88,6 +76,12 @@ const RootStack = createStackNavigator(
             navigationOptions: ({navigation}) => ({
                 title: 'Add Product'
               })
+        },
+        Bidding: {
+            screen: Bidding,
+            navigationOptions: ({navigation}) => ({
+                title: 'Bidding Page',
+            })
         }
     },
     {
